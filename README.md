@@ -28,7 +28,7 @@ Esta plantilla publica tu miniapp en Netlify con un **portero**: solo entran las
 | SUPPORT_EMAIL | Tu correo de soporte (opcional) | — |
 
 4. Publica. Al terminar, Netlify te muestra la dirección de tu app, algo como `tu-proyecto.netlify.app`.
-5. **Muy importante:** abre esa dirección en una ventana de incógnito. Si te pide iniciar sesión en Netlify, tus compradoras tampoco podrán entrar. Apágalo: en Netlify → tu proyecto → Configuración del proyecto → General → **Acceso de visitantes** (Visitor access) → deja la protección en **ninguna / pública** y guarda.
+5. **Muy importante:** abre esa dirección en una ventana de incógnito. Si te pide iniciar sesión en Netlify, quienes compren tampoco podrán entrar. Apágalo: en Netlify → tu proyecto → Configuración del proyecto → General → **Acceso de visitantes** (Visitor access) → deja la protección en **ninguna / pública** y guarda.
 
 Si GitHub te muestra "Autorizar Netlify" pidiendo acceso a repositorios públicos y privados, es normal: es el permiso oficial que Netlify necesita para crear tu copia.
 
@@ -66,6 +66,10 @@ En el área de miembros de tu producto, crea una lección con este texto, y en l
 2. Entra a `https://tu-proyecto.netlify.app/admin.html`, escribe tu clave de administración, tu correo y "Dar acceso".
 3. Vuelve a la dirección, escribe tu correo: tu app debe abrirse.
 
+## Paso 6 · Cambia el enlace de tu lección
+
+Si ya vendías con el Nivel 1, tu dirección ahora es **nueva**: cámbiala en la lección de tu área de miembros en Hotmart.
+
 ## Página de administración
 
 `https://tu-proyecto.netlify.app/admin.html` te permite:
@@ -82,7 +86,7 @@ En el área de miembros de tu producto, crea una lección con este texto, y en l
 | El Historial muestra 404 | La URL del Webhook está mal escrita (debe terminar en `/api/hotmart`) |
 | "Clave incorrecta" en administración | Revisa ADMIN_KEY en Netlify → configuración del proyecto → variables de entorno. Después de cambiarla, vuelve a publicar |
 | Al abrir la app pide iniciar sesión en Netlify | La protección de acceso de visitantes está activa. Apágala (ver Paso 1, punto 5) |
-| Una compradora no puede entrar | Consulta su correo en administración. Casi siempre compró con otro correo |
+| Quien compró no puede entrar | Consulta su correo en administración. Casi siempre compró con otro correo |
 | Cambiaste una variable y no hace efecto | Vuelve a publicar el proyecto en Netlify (Deploys → volver a publicar) |
 
 Si tu pantalla no se ve como esta guía, no elijas al azar: identifica tu objetivo, busca la opción equivalente y, si usas IA, envíale una captura y pídele que trabaje solo con lo que ves.
@@ -92,7 +96,7 @@ Si tu pantalla no se ve como esta guía, no elijas al azar: identifica tu objeti
 1. Alguien compra en Hotmart.
 2. Hotmart avisa a tu app (Webhook), firmado con tu Hottok.
 3. Tu app anota ese correo en su lista.
-4. La compradora entra con ese correo. Funciona en máximo 2 dispositivos: un tercero cierra la sesión más antigua.
+4. Quien compró entra con ese correo. Funciona en máximo 2 dispositivos: un tercero cierra la sesión más antigua.
 5. Si hay reembolso, cancelación o chargeback, Hotmart avisa y tu app quita el acceso.
 
-Límites: si una compradora comparte su enlace y su correo, otra persona podría entrar (limitado a 2 dispositivos). Los datos que tu app guarde en el navegador no pasan de un dispositivo a otro.
+Límites: si alguien comparte su enlace y su correo, otra persona podría entrar (limitado a 2 dispositivos). Los datos que tu app guarde en el navegador no pasan de un dispositivo a otro.
