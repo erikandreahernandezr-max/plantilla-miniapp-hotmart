@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{{APP_NAME}} · Acceso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="box">
+  <div class="top">
+    <div class="eyebrow">Acceso para compradores</div>
+    <h1>{{APP_NAME}}</h1>
+    <p>Entra con el <strong>mismo correo que usaste al pagar en Hotmart</strong>. Otro correo no funcionará.</p>
+  </div>
+  <form id="f" novalidate>
+    <label for="email">Tu correo de compra</label>
+    <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="tucorreo@ejemplo.com" required>
+    <button id="btn" type="submit">Entrar</button>
+    <div class="msg" id="msg" role="status" aria-live="polite"></div>
+  </form>
+  <p class="note">¿No recuerdas cuál correo usaste? Búscalo en tu bandeja: es el que recibió el mensaje de confirmación de compra de Hotmart.<br>Tu acceso funciona en máximo 2 dispositivos.<br>{{SUPPORT_LINE}}</p>
+</main>
+<script>
+(function(){
+  var f=document.getElementById('f'),btn=document.getElementById('btn'),msg=document.getElementById('msg'),email=document.getElementById('email');
+  function show(t,cls){msg.textContent=t;msg.className='msg '+(cls||'');}
+  var m=new URLSearchParams(location.search).get('m');
+  if(m==='sesion') show('Tu sesión se cerró porque entraste desde otro dispositivo. Vuelve a entrar con tu correo.','err');
+  if(m==='inactivo') show('Tu acceso ya no está activo. Si crees que es un error, escribe a soporte.','err');
+  if(!m){ fetch('/api/me',{credentials:'same-origin'}).then(function(r){return r.json();}).then(function(d){ if(d.ok) location.replace('/app'); }).catch(function(){}); }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ show('Escribe un correo válido.','err'); email.focus(); return; }
+    btn.disabled=true; show('Verificando tu compra…');
+    fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify({email:v})})
+      .then(function(r){return r.json();})
+      .then(function(d){ if(d.ok){ show('¡Listo! Entrando…','ok'); location.replace(d.redirect||'/app'); } else { show(d.error||'No pudimos verificar tu acceso.','err'); btn.disabled=false; } })
+      .catch(function(){ show('Sin conexión. Revisa tu internet e intenta de nuevo.','err'); btn.disabled=false; });
+  });
+})();
+</script>
+</body>
+</html>

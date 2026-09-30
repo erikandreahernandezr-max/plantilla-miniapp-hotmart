@@ -1,0 +1,4 @@
+node_modules
+.netlify
+netlify/lib/app-html.mjs
+public/index.html

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Administración de accesos</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="box">
+  <div class="top">
+    <div class="eyebrow">Solo para ti</div>
+    <h1>Administrar accesos</h1>
+    <p>Da o quita acceso a un correo manualmente, o consulta su estado.</p>
+  </div>
+  <form id="f" novalidate>
+    <label for="key">Clave de administración</label>
+    <input id="key" type="password" autocomplete="current-password" required>
+    <label for="email" style="margin-top:14px">Correo</label>
+    <input id="email" type="email" inputmode="email" required>
+    <label for="action" style="margin-top:14px">Acción</label>
+    <select id="action">
+      <option value="check">Consultar estado</option>
+      <option value="grant">Dar acceso</option>
+      <option value="revoke">Quitar acceso</option>
+    </select>
+    <button id="btn" type="submit">Ejecutar</button>
+    <div class="msg" id="msg" role="status" aria-live="polite"></div>
+  </form>
+</main>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i);};
+  $('f').addEventListener('submit',function(e){
+    e.preventDefault(); $('btn').disabled=true; $('msg').className='msg'; $('msg').textContent='…';
+    fetch('/api/admin',{method:'POST',headers:{'content-type':'application/json','x-admin-key':$('key').value},body:JSON.stringify({email:$('email').value,action:$('action').value})})
+      .then(function(r){return r.json();})
+      .then(function(d){ $('msg').className='msg '+(d.ok?'ok':'err'); $('msg').textContent=d.msg||d.error||'Error'; })
+      .catch(function(){ $('msg').className='msg err'; $('msg').textContent='Sin conexión.'; })
+      .finally(function(){ $('btn').disabled=false; });
+  });
+})();
+</script>
+</body>
+</html>

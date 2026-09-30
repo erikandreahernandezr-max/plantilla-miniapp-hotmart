@@ -1,0 +1,22 @@
+[build]
+  command = "node scripts/build.mjs"
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "no-referrer"
+    X-Content-Type-Options = "nosniff"
+
+# Datos que Netlify le pide al alumno al usar el botón "Deploy to Netlify"
+[template.environment]
+  APP_NAME = "Nombre de tu app (se muestra en la página de acceso)"
+  HOTMART_HOTTOK = "Hottok de Hotmart (Herramientas > Webhook > Autentificación)"
+  HOTMART_PRODUCT_ID = "ID de tu producto en Hotmart (solo números)"
+  ADMIN_KEY = "Inventa una clave larga para tu página de administración (mínimo 12 caracteres)"
+  SUPPORT_EMAIL = "Tu correo de soporte (opcional, se muestra en la página de acceso)"
