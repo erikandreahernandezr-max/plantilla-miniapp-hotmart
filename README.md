@@ -28,6 +28,11 @@ Esta plantilla publica tu miniapp en Netlify con un **portero**: solo entran las
 | SUPPORT_EMAIL | Tu correo de soporte (opcional) | — |
 
 4. Publica. Al terminar, Netlify te muestra la dirección de tu app, algo como `tu-proyecto.netlify.app`.
+5. **Muy importante:** abre esa dirección en una ventana de incógnito. Si te pide iniciar sesión en Netlify, tus compradoras tampoco podrán entrar. Apágalo: en Netlify → tu proyecto → Configuración del proyecto → General → **Acceso de visitantes** (Visitor access) → deja la protección en **ninguna / pública** y guarda.
+
+Si GitHub te muestra "Autorizar Netlify" pidiendo acceso a repositorios públicos y privados, es normal: es el permiso oficial que Netlify necesita para crear tu copia.
+
+**Cuida tus créditos:** el plan gratis de Netlify trae créditos mensuales y cada publicación gasta. Si se agotan, Netlify pausa **todos** tus proyectos. Usa el botón una sola vez y borra los proyectos de prueba.
 
 **Nunca** pegues el Hottok ni la clave de administración en un chat, un documento compartido o una captura de pantalla.
 
@@ -76,6 +81,7 @@ En el área de miembros de tu producto, crea una lección con este texto, y en l
 | El Historial de Hotmart muestra 401 | El Hottok en Netlify no coincide con el de Hotmart |
 | El Historial muestra 404 | La URL del Webhook está mal escrita (debe terminar en `/api/hotmart`) |
 | "Clave incorrecta" en administración | Revisa ADMIN_KEY en Netlify → configuración del proyecto → variables de entorno. Después de cambiarla, vuelve a publicar |
+| Al abrir la app pide iniciar sesión en Netlify | La protección de acceso de visitantes está activa. Apágala (ver Paso 1, punto 5) |
 | Una compradora no puede entrar | Consulta su correo en administración. Casi siempre compró con otro correo |
 | Cambiaste una variable y no hace efecto | Vuelve a publicar el proyecto en Netlify (Deploys → volver a publicar) |
 
